@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-deployment-2-123
+  name: nginx-deployment-2
   labels:
     app: nginx
 spec:
@@ -13,6 +13,7 @@ spec:
     metadata:
       labels:
         app: nginx
+        newlabel: abc
     spec:
       containers:
       - name: nginx
