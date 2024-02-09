@@ -1,6 +1,5 @@
 checks:
 - code: FW_ALLOWED_INSTANCE_TYPES
-  ruleDescription: Rule description
   description: The ec2 instance_type isn't in the permitted list
   requiredTypes:
   - resource
