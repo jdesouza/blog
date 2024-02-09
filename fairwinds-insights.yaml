@@ -9,7 +9,7 @@ manifests:
  
 terraform:
   paths:
-    - ./custom
+    - custom/
 pluto:
   enabled: false
 polaris:
