@@ -2,7 +2,7 @@ options:
   organization: acme-co
   hostname: https://staging.insights.fairwinds.com
   repositoryName: jdesouza/blog
-  baseBranch: js/Test
+  baseBranch: main
 manifests:
   yaml:
     - failing.yaml
