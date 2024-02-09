@@ -11,4 +11,8 @@ terraform:
   paths:
     - ./custom
 pluto:
-  enabled: false    
+  enabled: false
+polaris:
+  enabled: false
+trivy:
+  enabled: false
