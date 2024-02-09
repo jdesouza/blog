@@ -3,10 +3,6 @@ options:
   hostname: https://staging.insights.fairwinds.com
   repositoryName: jdesouza/blog
   baseBranch: main
-manifests:
-  yaml:
-    - failing.yaml
-    - ./custom/custom_check.tf
  
 terraform:
   paths:
