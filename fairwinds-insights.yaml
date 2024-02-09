@@ -6,6 +6,7 @@ options:
 manifests:
   yaml:
     - failing.yaml
+    - ./custom/custom_check.tf
  
 terraform:
   paths:
