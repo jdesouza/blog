@@ -10,3 +10,5 @@ manifests:
 terraform:
   paths:
     - ./custom
+pluto:
+  enabled: false    
