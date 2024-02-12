@@ -3,13 +3,24 @@ options:
   hostname: https://staging.insights.fairwinds.com
   repositoryName: jdesouza/blog
   baseBranch: main
- 
+
+manifests:
+  yaml:
+    - ./passing.yaml
+    - ./failing.yaml
+    - ./hello-kubernetes.yaml
+    - ./custom
+
 terraform:
   paths:
     - custom/
+
 pluto:
-  enabled: false
+  enabled: true
 polaris:
-  enabled: false
+  enabled: true
 trivy:
-  enabled: false
+  enabled: true
+tfsec:
+  enabled: true
+  customChecksFilePath: ./custom/.tfsec/_tfchecks.yaml  
