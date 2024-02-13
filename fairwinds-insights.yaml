@@ -13,7 +13,7 @@ manifests:
 
 terraform:
   paths:
-    - /app/repository/blog/custom
+    - custom
 
 pluto:
   enabled: true
@@ -23,4 +23,4 @@ trivy:
   enabled: true
 tfsec:
   enabled: true
-  customChecksFilePath: /app/repository/blog/custom/.tfsec/_tfchecks.yaml  
+  customChecksFilePath: custom/.tfsec/_tfchecks.yaml  
