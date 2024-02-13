@@ -1,5 +1,5 @@
 resource "aws_instance" "foo" {
-  ami           = "ami-005e54dee72cc1d00" # us-west-2
+  ami           = "ami-005e54dee72cc1d01" # us-west-1
   instance_type = "m7i-flex.large"
 
   network_interface {
