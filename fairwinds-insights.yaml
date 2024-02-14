@@ -13,7 +13,7 @@ manifests:
 
 terraform:
   paths:
-    -  ./custom
+    -  ./custom/
 
 reports:
   pluto:
