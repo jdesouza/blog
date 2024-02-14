@@ -24,4 +24,4 @@ reports:
     enabled: true
   tfsec:
     enabled: true
-    customChecksDirectory: ./custom/checks
+    customChecksDirectory: /app/repository/blog/custom/checks
