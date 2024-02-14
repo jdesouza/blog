@@ -1,6 +1,6 @@
 options:
   organization: acme-co
-  hostname: https://staging.insights.fairwinds.com/
+  hostname: https://staging.insights.fairwinds.com
   repositoryName: jdesouza/blog
   baseBranch: main
 
