@@ -1,10 +1,27 @@
-# These images will be scanned for vulnerabilities.
-images:
-  docker:
-  - nginx:1.18-alpine
+options:
+  organization: acme-co
+  hostname: https://staging.insights.fairwinds.com
+  repositoryName: jdesouza/blog
+  baseBranch: main
 
 manifests:
   yaml:
     - ./passing.yaml
     - ./failing.yaml
     - ./hello-kubernetes.yaml
+    - ./custom
+
+terraform:
+  paths:
+    -  /app/repository/blog/custom
+
+reports:
+  pluto:
+    enabled: true
+  polaris:
+    enabled: true
+  trivy:
+    enabled: true
+  tfsec:
+    enabled: true
+    customChecksDirectory: /app/repository/blog/custom/checks
