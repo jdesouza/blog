@@ -13,7 +13,7 @@ manifests:
 
 terraform:
   paths:
-    -  /app/repository/blog/custom
+    -  ./custom
 
 reports:
   pluto:
