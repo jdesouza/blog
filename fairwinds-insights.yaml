@@ -1,6 +1,6 @@
 options:
   organization: acme-co
-  hostname: https://be-js-custom.k8s.insights.fairwinds.com
+  hostname: https://staging.insights.fairwinds.com/
   repositoryName: jdesouza/blog
   baseBranch: main
 
@@ -13,14 +13,15 @@ manifests:
 
 terraform:
   paths:
-    - /app/repository/blog/custom
+    - ./custom
 
-pluto:
-  enabled: true
-polaris:
-  enabled: true
-trivy:
-  enabled: true
-tfsec:
-  enabled: true
-  customChecksFilePath: /app/repository/blog/custom/.tfsec/_tfchecks.yaml  
+reports:
+  pluto:
+    enabled: true
+  polaris:
+    enabled: true
+  trivy:
+    enabled: true
+  tfsec:
+    enabled: true
+    customChecksDirectory: ./custom/checks
