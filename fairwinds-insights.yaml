@@ -8,3 +8,4 @@ manifests:
     - ./passing.yaml
     - ./failing.yaml
     - ./hello-kubernetes.yaml
+    - ./hello-kubernetes-2.yaml
