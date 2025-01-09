@@ -25,5 +25,5 @@ spec:
           readOnlyRootFilesystem: true
           runAsNonRoot: false
           capabilities:
-            drop:
+            add:
               - ALL
