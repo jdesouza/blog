@@ -26,4 +26,4 @@ spec:
           runAsNonRoot: false
           capabilities:
             add:
-              - ALL
+              - ALL 
