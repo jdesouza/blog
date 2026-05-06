@@ -1,0 +1,6 @@
+research_task:
+  description: >
+    Research and summarize the topic: {topic}.
+    Output a short paragraph suitable for a blog outline.
+  expected_output: >
+    A brief markdown paragraph (3–6 sentences) with key points only.
