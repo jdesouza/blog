@@ -1,0 +1,23 @@
+# Misconfig: default namespace ServiceAccount granted cluster-admin (over-privileged RBAC).
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: bench-default-sa
+  namespace: security-test-bench
+  labels:
+    security-scanning/fixture: "true"
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: security-test-bench-cluster-admin-binding
+  labels:
+    security-scanning/fixture: "true"
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+  - kind: ServiceAccount
+    name: bench-default-sa
+    namespace: security-test-bench

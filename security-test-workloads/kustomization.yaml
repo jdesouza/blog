@@ -1,0 +1,13 @@
+# Apply all fixtures: kubectl apply -k security-test-workloads/
+# Remove: kubectl delete -k security-test-workloads/
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - k8s/00-namespace.yaml
+  - k8s/01-deployment-privileged-host.yaml
+  - k8s/02-deployment-capabilities-syscalls.yaml
+  - k8s/03-deployment-sensitive-env.yaml
+  - k8s/04-rbac-cluster-admin-binding.yaml
+  - k8s/05-pod-default-serviceaccount-mount.yaml
+  - k8s/06-ingress-tls-misconfig.yaml
+  - k8s/07-deployment-uses-cluster-admin-sa.yaml

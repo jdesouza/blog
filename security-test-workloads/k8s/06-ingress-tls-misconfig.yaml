@@ -1,0 +1,58 @@
+# Misconfigs: Ingress without TLS, permissive annotations patterns some linters flag.
+apiVersion: v1
+kind: Service
+metadata:
+  name: bench-ingress-backend
+  namespace: security-test-bench
+  labels:
+    security-scanning/fixture: "true"
+spec:
+  selector:
+    app: bench-ingress-backend
+  ports:
+    - port: 80
+      targetPort: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bench-ingress-backend
+  namespace: security-test-bench
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bench-ingress-backend
+  template:
+    metadata:
+      labels:
+        app: bench-ingress-backend
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:1.13
+          ports:
+            - containerPort: 80
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: bench-insecure-ingress
+  namespace: security-test-bench
+  labels:
+    security-scanning/fixture: "true"
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: bench-insecure.example.test
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: bench-ingress-backend
+                port:
+                  number: 80

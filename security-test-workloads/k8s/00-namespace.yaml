@@ -1,0 +1,9 @@
+# Intentionally insecure fixtures for Trivy / policy scanner testing.
+# Do not use in production. Delete with: kubectl delete namespace security-test-bench
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: security-test-bench
+  labels:
+    app.kubernetes.io/name: security-test-bench
+    security-scanning/fixture: "true"
