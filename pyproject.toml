@@ -5,7 +5,7 @@ description = "Fairwinds blog — CrewAI automation"
 readme = "README.md"
 requires-python = ">=3.10,<3.14"
 dependencies = [
-    "crewai[tools]>=0.86.0",
+    "crewai[google-genai,tools]>=0.86.0",
 ]
 
 [project.scripts]
