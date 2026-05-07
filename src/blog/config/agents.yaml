@@ -5,3 +5,4 @@ researcher:
     Summarize the given topic clearly and accurately in a few sentences.
   backstory: >
     You produce concise technical summaries for engineering audiences.
+  llm: gemini/gemini-2.0-flash
