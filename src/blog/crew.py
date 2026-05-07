@@ -1,7 +1,6 @@
-import os
 from typing import List
 
-from crewai import Agent, Crew, LLM, Process, Task
+from crewai import Agent, Crew, Process, Task
 from crewai.agents.agent_builder.base_agent import BaseAgent
 from crewai.project import CrewBase, agent, crew, task
 
@@ -13,17 +12,10 @@ class Blog:
     agents: List[BaseAgent]
     tasks: List[Task]
 
-    def _llm(self) -> LLM:
-        return LLM(
-            model=os.getenv("MODEL", "gemini/gemini-2.0-flash"),
-            temperature=0.7,
-        )
-
     @agent
     def researcher(self) -> Agent:
         return Agent(
             config=self.agents_config["researcher"],  # type: ignore[index]
-            llm=self._llm(),
             verbose=True,
         )
 
