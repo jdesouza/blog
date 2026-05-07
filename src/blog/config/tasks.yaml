@@ -1,7 +1,38 @@
-research_task:
+remediate_and_open_pr_task:
   description: >
-    Research and summarize the topic: {topic}.
-    Output a short paragraph suitable for a blog outline.
+    You are given a structured remediation request.
+
+    Repository: {repository}
+    Constraints: {constraints}
+    Runtime context: {runtime_context}
+    Action items: {action_items}
+
+    For EACH action item:
+      1. Verify every file in `iac_files` matches one of the
+         constraints.allowed_path_globs. Skip the item (and say so in the
+         output) if any iac_file is outside the allowed globs.
+      2. Use the `read_repo_file` tool to fetch the current contents of each
+         iac_file from `repository.full_name` at branch
+         `constraints.target_branch`.
+      3. Produce the fully-fixed file contents in memory by applying the
+         action_item.remediation guidance with the smallest change possible.
+         Preserve formatting, comments, and key order. Do NOT invent fields
+         that aren't required by the remediation.
+      4. Pick a unique head branch name like
+         `crewai/fix-<action_item.id>` and call the `open_pull_request` tool
+         with: repo_full_name=repository.full_name,
+         base_branch=constraints.target_branch,
+         head_branch=<chosen branch>, file_path=<the iac file>,
+         new_content=<the full fixed file>, commit_message=<short message>,
+         pr_title=<concise title>, pr_body=<markdown summary that links the
+         action_item.id, severity, rule_id, and remediation>,
+         draft=constraints.draft_pr.
+      5. Capture the returned PR URL.
+
+    Return one PR per processed action_item. Do not retry an item more than
+    twice. Never open more than one PR per action_item.
   expected_output: >
-    A brief markdown paragraph (3–6 sentences) with key points only.
-  agent: researcher
+    A short markdown report listing, per action_item.id: the chosen branch
+    name, the file changed, and the resulting PR URL (or a clear reason why
+    it was skipped). No prose intro, no apology — just the table.
+  agent: remediation_engineer

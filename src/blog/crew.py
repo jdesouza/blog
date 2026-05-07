@@ -4,25 +4,28 @@ from crewai import Agent, Crew, Process, Task
 from crewai.agents.agent_builder.base_agent import BaseAgent
 from crewai.project import CrewBase, agent, crew, task
 
+from blog.tools import OpenPullRequestTool, ReadRepoFileTool
+
 
 @CrewBase
 class Blog:
-    """Minimal crew for AMP deployment validation."""
+    """Remediation crew: turns action items into draft PRs."""
 
     agents: List[BaseAgent]
     tasks: List[Task]
 
     @agent
-    def researcher(self) -> Agent:
+    def remediation_engineer(self) -> Agent:
         return Agent(
-            config=self.agents_config["researcher"],  # type: ignore[index]
+            config=self.agents_config["remediation_engineer"],  # type: ignore[index]
+            tools=[ReadRepoFileTool(), OpenPullRequestTool()],
             verbose=True,
         )
 
     @task
-    def research_task(self) -> Task:
+    def remediate_and_open_pr_task(self) -> Task:
         return Task(
-            config=self.tasks_config["research_task"],  # type: ignore[index]
+            config=self.tasks_config["remediate_and_open_pr_task"],  # type: ignore[index]
         )
 
     @crew
