@@ -16,7 +16,7 @@ class Blog:
     def _llm(self) -> LLM:
         return LLM(
             model=os.getenv("MODEL", "gemini/gemini-2.0-flash"),
-            api_key=os.environ.get("GEMINI_API_KEY"),
+            api_key=os.getenv("GEMINI_API_KEY"),
             temperature=0.7,
         )
 
