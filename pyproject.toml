@@ -8,6 +8,12 @@ dependencies = [
     "crewai[tools]>=0.86.0",
 ]
 
+[project.scripts]
+run_crew = "blog.main:run"
+train_crew = "blog.main:train"
+replay_crew = "blog.main:replay"
+test_crew = "blog.main:test"
+
 [tool.crewai]
 type = "crew"
 

@@ -4,3 +4,4 @@ research_task:
     Output a short paragraph suitable for a blog outline.
   expected_output: >
     A brief markdown paragraph (3–6 sentences) with key points only.
+  agent: researcher
