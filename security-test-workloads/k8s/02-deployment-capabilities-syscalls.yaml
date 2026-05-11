@@ -1,0 +1,32 @@
+# Misconfigs: dangerous capabilities, seccomp unconfined, procMount unmasked.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bench-capabilities
+  namespace: security-test-bench
+  labels:
+    security-scanning/fixture: "true"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bench-capabilities
+  template:
+    metadata:
+      labels:
+        app: bench-capabilities
+    spec:
+      containers:
+        - name: main
+          image: alpine:3.5
+          imagePullPolicy: IfNotPresent
+          command: ["sleep", "infinity"]
+          securityContext:
+            capabilities:
+              add:
+                - SYS_ADMIN
+                - NET_RAW
+                - DAC_OVERRIDE
+            seccompProfile:
+              type: Unconfined
+            procMount: Unmasked

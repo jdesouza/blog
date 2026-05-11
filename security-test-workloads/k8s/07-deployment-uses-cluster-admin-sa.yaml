@@ -1,0 +1,25 @@
+# Misconfig: workload runs as ServiceAccount that is bound to cluster-admin (04-rbac).
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bench-rbac-abuser
+  namespace: security-test-bench
+  labels:
+    security-scanning/fixture: "true"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bench-rbac-abuser
+  template:
+    metadata:
+      labels:
+        app: bench-rbac-abuser
+    spec:
+      serviceAccountName: bench-default-sa
+      automountServiceAccountToken: true
+      containers:
+        - name: main
+          image: busybox:1.28
+          imagePullPolicy: IfNotPresent
+          command: ["sleep", "infinity"]

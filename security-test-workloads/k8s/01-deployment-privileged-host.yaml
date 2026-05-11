@@ -1,0 +1,40 @@
+# Misconfigs: privileged, hostPID, hostNetwork, hostIPC, writable root FS,
+# no securityContext (runs as root), no resource limits, latest tag.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bench-privileged-host
+  namespace: security-test-bench
+  labels:
+    security-scanning/fixture: "true"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bench-privileged-host
+  template:
+    metadata:
+      labels:
+        app: bench-privileged-host
+    spec:
+      hostNetwork: true
+      hostPID: true
+      hostIPC: true
+      containers:
+        - name: main
+          image: nginx:latest
+          imagePullPolicy: Always
+          securityContext:
+            privileged: true
+            allowPrivilegeEscalation: true
+            readOnlyRootFilesystem: false
+            runAsNonRoot: false
+            runAsUser: 0
+          volumeMounts:
+            - name: host-root
+              mountPath: /host
+      volumes:
+        - name: host-root
+          hostPath:
+            path: /
+            type: Directory

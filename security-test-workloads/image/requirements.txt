@@ -1,0 +1,4 @@
+# Old versions with well-documented CVEs (for dependency / filesystem scanning).
+PyYAML==5.3.1
+requests==2.19.0
+urllib3==1.24.2

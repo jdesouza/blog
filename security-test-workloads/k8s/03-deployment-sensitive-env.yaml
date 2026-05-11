@@ -1,0 +1,45 @@
+# Misconfigs: credentials and tokens in plain env vars (should use Secret + envFrom / volume).
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: bench-leaky-config
+  namespace: security-test-bench
+  labels:
+    security-scanning/fixture: "true"
+data:
+  database_password: "super-secret-not-really"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bench-sensitive-env
+  namespace: security-test-bench
+  labels:
+    security-scanning/fixture: "true"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bench-sensitive-env
+  template:
+    metadata:
+      labels:
+        app: bench-sensitive-env
+    spec:
+      containers:
+        - name: main
+          image: busybox:1.28
+          imagePullPolicy: IfNotPresent
+          command: ["sleep", "3600"]
+          env:
+            - name: AWS_ACCESS_KEY_ID
+              value: "AKIAIOSFODNN7EXAMPLE"
+            - name: AWS_SECRET_ACCESS_KEY
+              value: "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"
+            - name: DATABASE_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  name: bench-leaky-config
+                  key: database_password
+            - name: GITHUB_TOKEN
+              value: "ghp_exampleFakeTokenForScannerTesting1234567890"
