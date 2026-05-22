@@ -19,6 +19,9 @@ spec:
         image: alpine:3.13.0
         ports:
         - containerPort: 80
+        resources:
+          limits:
+            cpu: "500m"
         securityContext:
           allowPrivilegeEscalation: true
           privileged: true
