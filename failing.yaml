@@ -1,29 +1,15 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: v1
+kind: Pod
 metadata:
-  name: nginx-deployment-2
-  labels:
-    app: nginx
+  name: myapp-pod
 spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: nginx
-  template:
-    metadata:
-      labels:
-        app: nginx
-    spec:
-      containers:
-      - name: nginx
-        image: alpine:3.13.0
-        ports:
-        - containerPort: 80
-        securityContext:
-          allowPrivilegeEscalation: true
-          privileged: true
-          readOnlyRootFilesystem: true
-          runAsNonRoot: false
-          capabilities:
-            drop:
-              - ALL
+  containers:
+    - name: myapp
+      image: myapp:1.0
+      resources:
+        requests:
+          memory: "128Mi"
+          cpu: "500m"
+        limits:
+          memory: "256Mi"
+          cpu: "1000m"
